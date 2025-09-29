@@ -4,26 +4,24 @@ on:
    pull_request:
        branches:
            -staging
-
 jobs:
     test:
        runs-on: ubuntu-latest
        name: "Test"
-    env:
-       PORT: 5001
-       steps:
-
+       env:
+          PORT: 5001
+    steps:
           - name: "checkout"
-          uses: actions/checkout@v3
+            uses: actions/checkout@v3
 
           - name: "install dep"
-          run: npm ci
+            run: npm ci
 
           - name: "test"
-          run: npm test
+            run: npm test
 
           - name: "build"
-          run: | 
+            run: | 
 
               echo "running npm build"
               npm run build --if-present
