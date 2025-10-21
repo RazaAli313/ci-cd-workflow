@@ -3,34 +3,40 @@ name: Build and Deploy to Azure Web App (Container)
 on:
   push:
     branches:
-      - staging
+      - staging  # Run workflow when pushing to the staging branch
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # ✅ Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # ✅ Step 2: Azure Login
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Login to Azure Container Registry
+      # ✅ Step 3: Login to Azure Container Registry
+      - name: Log in to Azure Container Registry
         uses: docker/login-action@v2
         with:
           registry: ${{ secrets.AZURE_REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
           password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
 
+      # ✅ Step 4: Build Docker image (FIXED - no extra space)
       - name: Build Docker image
         run: docker build -t ${{ secrets.AZURE_REGISTRY_LOGIN_SERVER }}/myapp:latest .
 
+      # ✅ Step 5: Push Docker image to ACR
       - name: Push Docker image
         run: docker push ${{ secrets.AZURE_REGISTRY_LOGIN_SERVER }}/myapp:latest
 
+      # ✅ Step 6: Deploy to Azure Web App (Container)
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
