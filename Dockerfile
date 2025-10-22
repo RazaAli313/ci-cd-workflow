@@ -6,7 +6,7 @@ COPY package.json .
 
 RUN npm install -f  
 
-COPY ..
+COPY . .
 
 EXPOSE 5001
 
