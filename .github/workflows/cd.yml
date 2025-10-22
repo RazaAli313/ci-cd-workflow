@@ -29,6 +29,9 @@ jobs:
           password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
 
       # ✅ Step 4: Build Docker image (FIXED - no extra space)
+      - name: Debug Docker command
+        run: echo "docker build -t ${{ secrets.AZURE_REGISTRY_LOGIN_SERVER }}/myapp:latest ."
+
       - name: Build Docker image
         run: docker build -t ${{ secrets.AZURE_REGISTRY_LOGIN_SERVER }}/myapp:latest .
 
