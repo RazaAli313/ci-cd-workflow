@@ -4,10 +4,14 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN npm install -f  
+RUN npm install
 
 COPY . .
 
-EXPOSE 5001
+# Azure provides port via $PORT environment variable
+ENV PORT=8080
 
-CMD ["npm","start"]
+EXPOSE 8080
+
+# Ensure your app listens on process.env.PORT
+CMD ["npm", "start"]
