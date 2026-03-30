@@ -14,7 +14,7 @@ app.get("/", (req, res, next) => {
       </head>
     </html>
     <body>
-      <h1>Hello I am a web server at pucit new campus, powered by Syed Muhammad Raza Ali Zaidi demo on CI CD,CI/CD</h1>
+      <h1>Hello I am a web server at pucit new campus, powered by Syed Muhammad Raza Ali Zaidi demo on CI CD</h1>
     </body>
     `);
   next();
